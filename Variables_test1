@@ -1,0 +1,73 @@
+using System.Diagnostics;
+
+namespace HelloWorld
+{
+    class Program
+    {
+        public void shutdownstop()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nChcete zastavit automatické vypnutí?\n");
+            Console.ResetColor(); //reset to default values
+            string opt_stop = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (opt_stop == "yes" || opt_stop == "y" || opt_stop == "ano")
+            {
+                Console.WriteLine("\nZastaven časovač vypnutí počítače!");
+                Process.Start("shutdown", "/a");
+                Thread.Sleep(2500);
+            }
+            else if (opt_stop == "no" || opt_stop == "n" || opt_stop == "ne")
+            {
+                Console.WriteLine("\nOdpočet vypnutí počítače pokračuje!");
+                Thread.Sleep(2500);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nOdpočet vypnutí počítače pokračuje protože jste nevybrali možnost!");
+                Thread.Sleep(2500);
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Vyber 1-3:\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("1) Vypne počítač za 2 minuty.");
+            Console.WriteLine("2) Vypne počítač za 5 minut.");
+            Console.WriteLine("3) Zastaví vypnutí počítače.\n");
+            Console.ResetColor(); //reset to default values
+
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            if (option == 1)
+            {
+                Console.WriteLine("\nPočítač se vypne za 2 minuty!");
+                Process.Start("shutdown", "/s /t 120");
+                p.shutdownstop(); // Calling method shutdownstop
+            }
+            else if (option == 2)
+            {
+                Console.WriteLine("\nPočítač se vypne za 5 minut!");
+                Process.Start("shutdown", "/s /t 300");
+                p.shutdownstop(); // Calling method shutdownstop
+            }
+            else if (option == 3)
+            {
+                Console.WriteLine("\nZastaven časovač vypnutí počítače!");
+                Process.Start("shutdown", "/a");
+                Thread.Sleep(2500);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nNevybral jsi možnost 1,2 nebo 3!");
+                Thread.Sleep(2500);
+            }
+        }
+    }
+}
